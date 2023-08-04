@@ -3,6 +3,24 @@ package code;
 import java.util.List;
 import java.util.function.Predicate;
 
+/*
+ * Functional Interface
+ * 
+ * Added:
+ * - Predicate
+ * 
+ * Left to add:
+ * 
+ * - BiPredicate
+ * - Function
+ * - BiFunction
+ * - Consumer
+ * - BiConsumer
+ * - Supplier
+ * - UnaryOperator
+ * - BinaryOperator
+ */
+
 public class FunctionalInterface {
 
     public static void main(String[] args) {
