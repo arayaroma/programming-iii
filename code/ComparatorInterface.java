@@ -15,7 +15,7 @@ public class ComparatorInterface {
         System.out.println("Users List before sorting:");
         showUsers(users);
 
-        users.sort(new CompareAge());
+        users.sort(new OrderByAgeAscendent());
 
         System.out.println("Users list after sorting:");
         showUsers(users);
@@ -60,7 +60,7 @@ class User {
 
 }
 
-class CompareAge implements Comparator<User> {
+class OrderByAgeAscendent implements Comparator<User> {
 
     @Override
     public int compare(User arg0, User arg1) {
