@@ -27,6 +27,9 @@ public class FunctionalInterface {
                         .filter(hotel.getRoomsBasedInCapacity(2))
                         .count());
 
+        System.out.println("Available rooms with price 100: " +
+                hotel.getRoomsBasedInPrice(100).size());
+
     }
 
     public static List<Room> setFixedRooms() {
@@ -68,6 +71,13 @@ class Hotel {
 
     public Predicate<Room> getRoomsBasedInCapacity(int capacity) {
         return room -> room.getCapacity() == capacity;
+    }
+
+    public List<Room> getRoomsBasedInPrice(int price) {
+        return getAvailableRooms()
+                .stream()
+                .filter(room -> room.getPrice() == price)
+                .collect(java.util.stream.Collectors.toList());
     }
 }
 
