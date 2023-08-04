@@ -19,8 +19,13 @@ public class FunctionalInterface {
         System.out.println("Hotel name: " + hotel.getName());
         System.out.println("Total rooms: " + hotel.getTotalRooms().size());
 
-        hotel.getAvailableRooms(hotel.getTotalRooms());
-        System.out.println("Available rooms: " + hotel.getAvailableRooms(hotel.getTotalRooms()).size());
+        System.out.println("Available rooms: " + hotel.getAvailableRooms().size());
+
+        System.out.println("Available rooms with capacity 2: " +
+                hotel.getAvailableRooms()
+                        .stream()
+                        .filter(hotel.getRoomsBasedInCapacity(2))
+                        .count());
 
     }
 
@@ -55,10 +60,14 @@ class Hotel {
         return rooms;
     }
 
-    public List<Room> getAvailableRooms(List<Room> rooms) {
+    public List<Room> getAvailableRooms() {
         return rooms.stream()
                 .filter(availableRoom)
                 .collect(java.util.stream.Collectors.toList());
+    }
+
+    public Predicate<Room> getRoomsBasedInCapacity(int capacity) {
+        return room -> room.getCapacity() == capacity;
     }
 }
 
