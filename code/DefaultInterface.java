@@ -1,6 +1,6 @@
 package code;
 
-class DefaultInterface {
+public class DefaultInterface {
     public static void main(String[] args) {
         Driver();
     }
