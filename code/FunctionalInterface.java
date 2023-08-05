@@ -1,6 +1,7 @@
 package code;
 
 import java.util.List;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 /*
@@ -48,6 +49,9 @@ public class FunctionalInterface {
         System.out.println("Available rooms with price 100: " +
                 hotel.getRoomsBasedInPrice(100).size());
 
+        System.out.println("Available rooms with capacity 6: " +
+                hotel.getRoomsAvailableBasedInCapacity(6).size());
+
     }
 
     public static List<Room> setFixedRooms() {
@@ -66,7 +70,6 @@ public class FunctionalInterface {
 class Hotel {
     private String name;
     private List<Room> rooms;
-    private Predicate<Room> availableRoom = room -> room.isAvailable();
 
     public Hotel(String name, List<Room> rooms) {
         this.name = name;
@@ -82,6 +85,7 @@ class Hotel {
     }
 
     public List<Room> getAvailableRooms() {
+        Predicate<Room> availableRoom = room -> room.isAvailable();
         return rooms.stream()
                 .filter(availableRoom)
                 .collect(java.util.stream.Collectors.toList());
@@ -95,6 +99,16 @@ class Hotel {
         return getAvailableRooms()
                 .stream()
                 .filter(room -> room.getPrice() == price)
+                .collect(java.util.stream.Collectors.toList());
+    }
+
+    public List<Room> getRoomsAvailableBasedInCapacity(int capacity) {
+        BiPredicate<Room, Integer> availableRoomWithCapacity = (room, roomCapacity) -> room.isAvailable()
+                && room.getCapacity() == roomCapacity;
+
+        return getAvailableRooms()
+                .stream()
+                .filter(room -> availableRoomWithCapacity.test(room, capacity))
                 .collect(java.util.stream.Collectors.toList());
     }
 }
