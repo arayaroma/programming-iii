@@ -1,6 +1,7 @@
 package code;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
@@ -64,6 +65,10 @@ public class FunctionalInterface {
         hotel.higherPriceIfIsNotAvailable(150)
                 .accept(hotel.getTotalRooms().get(1));
         System.out.println("Price of unavailable room 203: " + hotel.getTotalRooms().get(1).getPrice());
+
+        hotel.lowerPriceIfIsAvailable(50, 105)
+                .accept(hotel.getTotalRooms().get(0), 105);
+        System.out.println("Price of available room 105: " + hotel.getTotalRooms().get(0).getPrice());
 
     }
 
@@ -139,6 +144,14 @@ class Hotel {
     public Consumer<Room> higherPriceIfIsNotAvailable(int price) {
         return room -> {
             if (!room.isAvailable()) {
+                room.setPrice(price);
+            }
+        };
+    }
+
+    public BiConsumer<Room, Integer> lowerPriceIfIsAvailable(int price, int roomNumber) {
+        return (room, number) -> {
+            if (room.isAvailable() && room.getNumber() == number) {
                 room.setPrice(price);
             }
         };
