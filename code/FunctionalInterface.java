@@ -11,23 +11,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-/*
- * Functional Interface
- * 
- * Added:
- * - Predicate
- * - BiPredicate
- * - Function
- * - BiFunction
- * - Consumer
- * - BiConsumer
- * - Supplier
- * 
- * Left to add:
- * 
- * - UnaryOperator
- * - BinaryOperator
- */
 
 public class FunctionalInterface {
 
