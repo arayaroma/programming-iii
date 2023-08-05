@@ -1,6 +1,7 @@
 package code;
 
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -11,11 +12,11 @@ import java.util.function.Predicate;
  * Added:
  * - Predicate
  * - BiPredicate
+ * - Function
+ * - BiFunction
  * 
  * Left to add:
  * 
- * - Function
- * - BiFunction
  * - Consumer
  * - BiConsumer
  * - Supplier
@@ -54,6 +55,10 @@ public class FunctionalInterface {
                 hotel.getRoomsAvailableBasedInCapacity(6).size());
 
         System.out.println("Room numbers: " + hotel.getRoomNumbers());
+
+        System.out.println("Capacity of room 105: " +
+                hotel.getCapacityBasedInRoomNumber(hotel.getTotalRooms().get(0), 105)
+                        .apply(hotel.getTotalRooms().get(0), 105));
 
     }
 
@@ -120,6 +125,10 @@ class Hotel {
         return rooms.stream()
                 .map(getRoomNumber)
                 .collect(java.util.stream.Collectors.toList());
+    }
+
+    public BiFunction<Room, Integer, Integer> getCapacityBasedInRoomNumber(Room room, int roomNumber) {
+        return (roomLambda, numberLambda) -> roomLambda.getNumber() == numberLambda ? roomLambda.getCapacity() : 0;
     }
 }
 
