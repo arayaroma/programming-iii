@@ -7,6 +7,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /*
  * Functional Interface
@@ -17,10 +18,10 @@ import java.util.function.Predicate;
  * - Function
  * - BiFunction
  * - Consumer
+ * - BiConsumer
  * 
  * Left to add:
  * 
- * - BiConsumer
  * - Supplier
  * - UnaryOperator
  * - BinaryOperator
@@ -36,8 +37,23 @@ public class FunctionalInterface {
         MockedHotel();
     }
 
+    public static Supplier<Hotel> getHotelInstance() {
+        return () -> new Hotel("Hotel California", setFixedRooms());
+    }
+
+    public static List<Room> setFixedRooms() {
+        List<Room> rooms = new java.util.ArrayList<>();
+        rooms.add(new Room(105, 2, true, 100));
+        rooms.add(new Room(203, 2, false, 100));
+        rooms.add(new Room(302, 4, true, 200));
+        rooms.add(new Room(404, 4, false, 200));
+        rooms.add(new Room(500, 6, true, 300));
+        rooms.add(new Room(604, 6, false, 300));
+        return rooms;
+    }
+
     public static void MockedHotel() {
-        Hotel hotel = new Hotel("Hotel California", setFixedRooms());
+        Hotel hotel = getHotelInstance().get();
 
         System.out.println("Hotel name: " + hotel.getName());
         System.out.println("Total rooms: " + hotel.getTotalRooms().size());
@@ -70,17 +86,6 @@ public class FunctionalInterface {
                 .accept(hotel.getTotalRooms().get(0), 105);
         System.out.println("Price of available room 105: " + hotel.getTotalRooms().get(0).getPrice());
 
-    }
-
-    public static List<Room> setFixedRooms() {
-        List<Room> rooms = new java.util.ArrayList<>();
-        rooms.add(new Room(105, 2, true, 100));
-        rooms.add(new Room(203, 2, false, 100));
-        rooms.add(new Room(302, 4, true, 200));
-        rooms.add(new Room(404, 4, false, 200));
-        rooms.add(new Room(500, 6, true, 300));
-        rooms.add(new Room(604, 6, false, 300));
-        return rooms;
     }
 
 }
@@ -156,6 +161,7 @@ class Hotel {
             }
         };
     }
+
 }
 
 class Room {
