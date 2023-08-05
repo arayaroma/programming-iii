@@ -3,6 +3,7 @@ package code;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -14,10 +15,10 @@ import java.util.function.Predicate;
  * - BiPredicate
  * - Function
  * - BiFunction
+ * - Consumer
  * 
  * Left to add:
  * 
- * - Consumer
  * - BiConsumer
  * - Supplier
  * - UnaryOperator
@@ -59,6 +60,10 @@ public class FunctionalInterface {
         System.out.println("Capacity of room 105: " +
                 hotel.getCapacityBasedInRoomNumber(hotel.getTotalRooms().get(0), 105)
                         .apply(hotel.getTotalRooms().get(0), 105));
+
+        hotel.higherPriceIfIsNotAvailable(150)
+                .accept(hotel.getTotalRooms().get(1));
+        System.out.println("Price of unavailable room 203: " + hotel.getTotalRooms().get(1).getPrice());
 
     }
 
@@ -130,6 +135,14 @@ class Hotel {
     public BiFunction<Room, Integer, Integer> getCapacityBasedInRoomNumber(Room room, int roomNumber) {
         return (roomLambda, numberLambda) -> roomLambda.getNumber() == numberLambda ? roomLambda.getCapacity() : 0;
     }
+
+    public Consumer<Room> higherPriceIfIsNotAvailable(int price) {
+        return room -> {
+            if (!room.isAvailable()) {
+                room.setPrice(price);
+            }
+        };
+    }
 }
 
 class Room {
@@ -155,6 +168,10 @@ class Room {
 
     public boolean isAvailable() {
         return isAvailable;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getPrice() {
