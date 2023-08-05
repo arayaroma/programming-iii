@@ -2,6 +2,7 @@ package code;
 
 import java.util.List;
 import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 /*
@@ -9,10 +10,10 @@ import java.util.function.Predicate;
  * 
  * Added:
  * - Predicate
+ * - BiPredicate
  * 
  * Left to add:
  * 
- * - BiPredicate
  * - Function
  * - BiFunction
  * - Consumer
@@ -52,16 +53,18 @@ public class FunctionalInterface {
         System.out.println("Available rooms with capacity 6: " +
                 hotel.getRoomsAvailableBasedInCapacity(6).size());
 
+        System.out.println("Room numbers: " + hotel.getRoomNumbers());
+
     }
 
     public static List<Room> setFixedRooms() {
         List<Room> rooms = new java.util.ArrayList<>();
-        rooms.add(new Room(1, 2, true, 100));
-        rooms.add(new Room(2, 2, false, 100));
-        rooms.add(new Room(3, 4, true, 200));
-        rooms.add(new Room(4, 4, false, 200));
-        rooms.add(new Room(5, 6, true, 300));
-        rooms.add(new Room(6, 6, false, 300));
+        rooms.add(new Room(105, 2, true, 100));
+        rooms.add(new Room(203, 2, false, 100));
+        rooms.add(new Room(302, 4, true, 200));
+        rooms.add(new Room(404, 4, false, 200));
+        rooms.add(new Room(500, 6, true, 300));
+        rooms.add(new Room(604, 6, false, 300));
         return rooms;
     }
 
@@ -109,6 +112,13 @@ class Hotel {
         return getAvailableRooms()
                 .stream()
                 .filter(room -> availableRoomWithCapacity.test(room, capacity))
+                .collect(java.util.stream.Collectors.toList());
+    }
+
+    public List<Integer> getRoomNumbers() {
+        Function<Room, Integer> getRoomNumber = room -> room.getNumber();
+        return rooms.stream()
+                .map(getRoomNumber)
                 .collect(java.util.stream.Collectors.toList());
     }
 }
