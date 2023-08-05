@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -92,6 +93,11 @@ public class FunctionalInterface {
         System.out.println("Total rooms: " + hotel.getTotalRooms().size());
         System.out.println("Room 700: " + hotel.getTotalRooms().get(6).getNumber());
 
+        System.out.println("New room: " +
+                hotel.combineRooms(800)
+                        .apply(hotel.getTotalRooms().get(0), hotel.getTotalRooms().get(1))
+                        .getNumber());
+
     }
 
 }
@@ -176,6 +182,15 @@ class Hotel {
         };
     }
 
+    public BinaryOperator<Room> combineRooms(int roomNumber) {
+        return (room1, room2) -> {
+            Room room = new Room(roomNumber, 0, false, 0);
+            room.setCapacity(room1.getCapacity() + room2.getCapacity());
+            room.setPrice(room1.getPrice() + room2.getPrice());
+            return room;
+        };
+    }
+
 }
 
 class Room {
@@ -193,6 +208,10 @@ class Room {
 
     public int getNumber() {
         return number;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public int getCapacity() {
