@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 /*
  * Functional Interface
@@ -19,10 +20,10 @@ import java.util.function.Supplier;
  * - BiFunction
  * - Consumer
  * - BiConsumer
+ * - Supplier
  * 
  * Left to add:
  * 
- * - Supplier
  * - UnaryOperator
  * - BinaryOperator
  */
@@ -85,6 +86,11 @@ public class FunctionalInterface {
         hotel.lowerPriceIfIsAvailable(50, 105)
                 .accept(hotel.getTotalRooms().get(0), 105);
         System.out.println("Price of available room 105: " + hotel.getTotalRooms().get(0).getPrice());
+
+        hotel.addRoom(700, 8, true, 400)
+                .apply(hotel.getTotalRooms().get(0));
+        System.out.println("Total rooms: " + hotel.getTotalRooms().size());
+        System.out.println("Room 700: " + hotel.getTotalRooms().get(6).getNumber());
 
     }
 
@@ -159,6 +165,14 @@ class Hotel {
             if (room.isAvailable() && room.getNumber() == number) {
                 room.setPrice(price);
             }
+        };
+    }
+
+    public UnaryOperator<Room> addRoom(int number, int capacity, boolean isAvailable, int price) {
+        return room -> {
+            room = new Room(number, capacity, isAvailable, price);
+            rooms.add(room);
+            return room;
         };
     }
 
