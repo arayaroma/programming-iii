@@ -11,9 +11,9 @@ import java.util.function.Predicate;
 * 2. allMatch(Predicate)
 * 3. anyMatch(Predicate)
 * 4. min(Comparator)
+* 5. max(Comparator)
 * 
  * To do:
- * 5. max(Comparator)
  * 6. map(Function)
  * 7. reduce(T, BiFunction)
  * 8. forEach(Consumer)
@@ -57,6 +57,8 @@ public class Streams {
         System.out.println("Cheapest flight to London: " + getCheapestFlight(flights, "London"));
 
         System.out.println("Most capacity flight to Helsinski: " + getMostCapacityFlight(flights, "Helsinski"));
+
+        System.out.println("Sum of prices: " + getSumOfPrices(flights));
 
     }
 
@@ -114,6 +116,12 @@ public class Streams {
                 .filter(flight -> flight.getDestination().equals(destination))
                 .max(Comparator.comparing(Flight::getCapacity))
                 .get();
+    }
+
+    public static int getSumOfPrices(List<Flight> flights) {
+        return flights.stream()
+                .mapToInt(Flight::getPrice)
+                .sum();
     }
 
 }
