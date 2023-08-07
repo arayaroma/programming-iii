@@ -10,9 +10,9 @@ import java.util.function.Predicate;
 * 1. filter(Predicate)
 * 2. allMatch(Predicate)
 * 3. anyMatch(Predicate)
+* 4. min(Comparator)
 * 
  * To do:
- * 4. min(Comparator)
  * 5. max(Comparator)
  * 6. map(Function)
  * 7. reduce(T, BiFunction)
@@ -55,6 +55,8 @@ public class Streams {
                 existsFlight(flights, 1, "London"));
 
         System.out.println("Cheapest flight to London: " + getCheapestFlight(flights, "London"));
+
+        System.out.println("Most capacity flight to Helsinski: " + getMostCapacityFlight(flights, "Helsinski"));
 
     }
 
@@ -104,6 +106,13 @@ public class Streams {
         return flights.stream()
                 .filter(flight -> flight.getDestination().equals(destination))
                 .min(Comparator.comparing(Flight::getPrice))
+                .get();
+    }
+
+    public static Flight getMostCapacityFlight(List<Flight> flights, String destination) {
+        return flights.stream()
+                .filter(flight -> flight.getDestination().equals(destination))
+                .max(Comparator.comparing(Flight::getCapacity))
                 .get();
     }
 
