@@ -67,6 +67,9 @@ public class Streams {
 
         flights.forEach(flight -> System.out.println(flight.toString()));
 
+        System.out.println("Flights ordered by date: ");
+        getFlightsOrderedByDate(flights, LocalDate.now()).forEach(flight -> System.out.println(flight.toString()));
+
     }
 
     public static List<Flight> createFlights() {
@@ -141,6 +144,12 @@ public class Streams {
     public static void increaseFlightPrice(List<Flight> flights, int increase) {
         flights.stream()
                 .forEach(flight -> flight.setPrice(flight.getPrice() + increase));
+    }
+
+    public static List<Flight> getFlightsOrderedByDate(List<Flight> flights, LocalDate date) {
+        return flights.stream()
+                .sorted(Comparator.comparing(Flight::getDate))
+                .collect(java.util.stream.Collectors.toList());
     }
 
 }
