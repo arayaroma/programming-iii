@@ -2,6 +2,7 @@ package code;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.function.Predicate;
 
 /*
 * Done:
@@ -43,6 +44,9 @@ public class Streams {
 
         System.out.println("Filtered flights: ");
         filteredFlights.forEach(flight -> System.out.println(flight.toString()));
+
+        System.out.println("Filtered flights where price is lower than 300: ");
+        getFlightsWherePriceIsLowerThan300(flights).forEach(flight -> System.out.println(flight.toString()));
     }
 
     public static List<Flight> createFlights() {
@@ -63,6 +67,16 @@ public class Streams {
     public static List<Flight> getFlightWhereCapacityIsMoreThan300(List<Flight> flights) {
         return flights.stream()
                 .filter(flight -> flight.getCapacity() > 300)
+                .collect(java.util.stream.Collectors.toList());
+    }
+
+    public static Predicate<Flight> PriceLowerThan300(List<Flight> flights) {
+        return flight -> flight.getPrice() < 300;
+    }
+
+    public static List<Flight> getFlightsWherePriceIsLowerThan300(List<Flight> flights) {
+        return flights.stream()
+                .filter(PriceLowerThan300(flights))
                 .collect(java.util.stream.Collectors.toList());
     }
 
