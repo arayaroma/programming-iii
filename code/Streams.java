@@ -12,11 +12,11 @@ import java.util.function.Predicate;
 * 3. anyMatch(Predicate)
 * 4. min(Comparator)
 * 5. max(Comparator)
+* 6. map(Function)
+* 7. reduce(T, BiFunction)
+* 8. forEach(Consumer)
 * 
  * To do:
- * 6. map(Function)
- * 7. reduce(T, BiFunction)
- * 8. forEach(Consumer)
  * 9. sorted(Comparator)
  * 10. collect(Collector)
  * 11. toList
@@ -59,6 +59,13 @@ public class Streams {
         System.out.println("Most capacity flight to Helsinski: " + getMostCapacityFlight(flights, "Helsinski"));
 
         System.out.println("Sum of prices: " + getSumOfPrices(flights));
+
+        System.out.println("Price of flights to Tokyo: " + getPriceOfFlights(flights, "Tokyo"));
+
+        System.out.println("Increase price of flights by 50: ");
+        increaseFlightPrice(flights, 50);
+
+        flights.forEach(flight -> System.out.println(flight.toString()));
 
     }
 
@@ -124,6 +131,18 @@ public class Streams {
                 .sum();
     }
 
+    public static int getPriceOfFlights(List<Flight> flights, String destination) {
+        return flights.stream()
+                .filter(flight -> flight.getDestination().equals(destination))
+                .map(Flight::getPrice)
+                .reduce(0, Integer::sum);
+    }
+
+    public static void increaseFlightPrice(List<Flight> flights, int increase) {
+        flights.stream()
+                .forEach(flight -> flight.setPrice(flight.getPrice() + increase));
+    }
+
 }
 
 class Flight {
@@ -147,6 +166,10 @@ class Flight {
 
     public String getDestination() {
         return destination;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getPrice() {
