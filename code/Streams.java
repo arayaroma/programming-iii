@@ -3,7 +3,10 @@ package code;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /*
 * Done:
@@ -15,9 +18,9 @@ import java.util.function.Predicate;
 * 6. map(Function)
 * 7. reduce(T, BiFunction)
 * 8. forEach(Consumer)
+* 9. sorted(Comparator)
 * 
  * To do:
- * 9. sorted(Comparator)
  * 10. collect(Collector)
  * 11. toList
  * 12. toSet
@@ -69,6 +72,9 @@ public class Streams {
 
         System.out.println("Flights ordered by date: ");
         getFlightsOrderedByDate(flights, LocalDate.now()).forEach(flight -> System.out.println(flight.toString()));
+
+        System.out.println("Flights destinations: ");
+        getFlights(flights);
 
     }
 
@@ -150,6 +156,12 @@ public class Streams {
         return flights.stream()
                 .sorted(Comparator.comparing(Flight::getDate))
                 .collect(java.util.stream.Collectors.toList());
+    }
+
+    public static Set<String> getFlights(List<Flight> flights) {
+        return flights.stream()
+                .map(flight -> flight.getDestination())
+                .collect(Collectors.toSet());
     }
 
 }
