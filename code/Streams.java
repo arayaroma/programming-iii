@@ -7,10 +7,10 @@ import java.util.function.Predicate;
 /*
 * Done:
 * 1. filter(Predicate)
+* 2. allMatch(Predicate)
+* 3. anyMatch(Predicate)
 * 
  * To do:
- * 2. allMatch(Predicate)
- * 3. anyMatch(Predicate)
  * 4. min(Comparator)
  * 5. max(Comparator)
  * 6. map(Function)
@@ -50,6 +50,9 @@ public class Streams {
 
         System.out.println("All flights where year is 2020: " + allFlightsWhereYearIs2020(flights));
 
+        System.out.println("Exists flight with number 1 and destination London: " +
+                existsFlight(flights, 1, "London"));
+
     }
 
     public static List<Flight> createFlights() {
@@ -86,6 +89,12 @@ public class Streams {
     public static Boolean allFlightsWhereYearIs2020(List<Flight> flights) {
         return flights.stream()
                 .allMatch(flight -> flight.getDate().getYear() == 2020);
+    }
+
+    public static Boolean existsFlight(List<Flight> flights, int number, String destination) {
+        return flights.stream()
+                .anyMatch(flight -> flight.getNumber() == number
+                        && flight.getDestination().equals(destination));
     }
 
 }
