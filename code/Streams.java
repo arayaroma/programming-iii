@@ -1,6 +1,7 @@
 package code;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -53,6 +54,8 @@ public class Streams {
         System.out.println("Exists flight with number 1 and destination London: " +
                 existsFlight(flights, 1, "London"));
 
+        System.out.println("Cheapest flight to London: " + getCheapestFlight(flights, "London"));
+
     }
 
     public static List<Flight> createFlights() {
@@ -95,6 +98,13 @@ public class Streams {
         return flights.stream()
                 .anyMatch(flight -> flight.getNumber() == number
                         && flight.getDestination().equals(destination));
+    }
+
+    public static Flight getCheapestFlight(List<Flight> flights, String destination) {
+        return flights.stream()
+                .filter(flight -> flight.getDestination().equals(destination))
+                .min(Comparator.comparing(Flight::getPrice))
+                .get();
     }
 
 }
