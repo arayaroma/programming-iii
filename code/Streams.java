@@ -47,6 +47,9 @@ public class Streams {
 
         System.out.println("Filtered flights where price is lower than 300: ");
         getFlightsWherePriceIsLowerThan300(flights).forEach(flight -> System.out.println(flight.toString()));
+
+        System.out.println("All flights where year is 2020: " + allFlightsWhereYearIs2020(flights));
+
     }
 
     public static List<Flight> createFlights() {
@@ -78,6 +81,11 @@ public class Streams {
         return flights.stream()
                 .filter(PriceLowerThan300(flights))
                 .collect(java.util.stream.Collectors.toList());
+    }
+
+    public static Boolean allFlightsWhereYearIs2020(List<Flight> flights) {
+        return flights.stream()
+                .allMatch(flight -> flight.getDate().getYear() == 2020);
     }
 
 }
