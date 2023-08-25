@@ -1,0 +1,11 @@
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanillaWs/src/main/java/cr/ac/una/unaplanillaws/model/TipoPlanillaDto.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanillaWs/src/main/java/cr/ac/una/unaplanillaws/model/TipoPlanilla.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanillaWs/src/main/java/cr/ac/una/unaplanillaws/controller/JsonbContextResolver.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanillaWs/src/main/java/cr/ac/una/unaplanillaws/service/EmpleadoService.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanillaWs/src/main/java/cr/ac/una/unaplanillaws/util/Respuesta.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanillaWs/src/main/java/cr/ac/una/unaplanillaws/controller/EmpleadoController.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanillaWs/src/main/java/cr/ac/una/unaplanillaws/util/CodigoRespuesta.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanillaWs/src/main/java/cr/ac/una/unaplanillaws/JakartaRestConfiguration.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanillaWs/src/main/java/cr/ac/una/unaplanillaws/model/Empleado.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanillaWs/src/main/java/cr/ac/una/unaplanillaws/service/TipoPlanillaService.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanillaWs/src/main/java/cr/ac/una/unaplanillaws/model/EmpleadoDto.java

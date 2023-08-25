@@ -1,0 +1,17 @@
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/App.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/controller/PrincipalViewController.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/util/Respuesta.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/service/TipoPlanillaService.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/util/BindingUtils.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/controller/TiposPlanillaViewController.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/util/Mensaje.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/util/Request.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/model/TipoPlanillaDto.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/model/EmpleadoDto.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/controller/Controller.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/util/FlowController.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/controller/LogInViewController.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/service/EmpleadoService.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/controller/EmpleadosViewController.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/util/AppContext.java
+/home/araya/Repositories/programming-iii/skeletons/UnaPlanilla/src/main/java/cr/ac/una/unaplanilla/util/Formato.java
