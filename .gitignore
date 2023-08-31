@@ -1,4 +1,5 @@
 skeletons/UnaPlanilla/target/*
+skeletons/UnaPlanilla/.vscode/*
 skeletons/UnaPlanillaWs/target/*
 nbactions.xml
 nb-configuration.xml
