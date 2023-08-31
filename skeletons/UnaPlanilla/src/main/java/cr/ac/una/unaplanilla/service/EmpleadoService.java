@@ -20,61 +20,50 @@ import cr.ac.una.unaplanilla.util.Respuesta;
  * @author Carlos
  */
 public class EmpleadoService {
-
+    
     public Respuesta getUsuario(String usuario, String clave) {
         try {
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("usuario", usuario);
-            parametros.put("clave", clave);
-            Request request = new Request("EmpleadoController/empleado",
-                    "/{usuario}/{clave}", parametros);
-            request.get();
-            if (request.isError())
-                return new Respuesta(false, request.getError(), "");
-
-            EmpleadoDto empleadoDto = (EmpleadoDto) request.readEntity(EmpleadoDto.class);
-            return new Respuesta(true, "", "", "Empleado", empleadoDto);
+            // TODO
+            return new Respuesta(true, "", "", "Empleado", empleado);
         } catch (Exception ex) {
-            Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE,
-                    "Error obteniendo el usuario [" + usuario + "]", ex);
+            Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE, "Error obteniendo el usuario [" + usuario + "]", ex);
             return new Respuesta(false, "Error obteniendo el usuario.", "getUsuario " + ex.getMessage());
         }
     }
-
+    
     public Respuesta getEmpleado(Long id) {
         try {
-            // TODO
-            return null; // new Respuesta(true, "", "", "Empleado", empleado);
+            //TODO
+            return new Respuesta(true, "", "", "Empleado", empleado);
         } catch (Exception ex) {
-            Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE,
-                    "Error obteniendo el empleado [" + id + "]", ex);
+            Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE, "Error obteniendo el empleado [" + id + "]", ex);
             return new Respuesta(false, "Error obteniendo el empleado.", "getEmpleado " + ex.getMessage());
         }
     }
-
+    
     public Respuesta getEmpleados(String cedula, String nombre, String pApellido) {
         try {
             // TODO
-            return null; // new Respuesta(true, "", "", "Empleados", empleado);
+            return new Respuesta(true, "", "", "Empleados", empleados);
         } catch (Exception ex) {
             Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE, "Error obteniendo empleados.", ex);
             return new Respuesta(false, "Error obteniendo empleados.", "getEmpleados " + ex.getMessage());
         }
     }
-
+    
     public Respuesta guardarEmpleado(EmpleadoDto empleado) {
         try {
             // TODO
-            return null; // new Respuesta(true, "", "", "Empleado", empleado);
+            return new Respuesta(true, "", "", "Empleado", empleadoDto);
         } catch (Exception ex) {
             Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE, "Error guardando el empleado.", ex);
             return new Respuesta(false, "Error guardando el empleado.", "guardarEmpleado " + ex.getMessage());
         }
     }
-
+    
     public Respuesta eliminarEmpleado(Long id) {
         try {
-            // TODO
+            //TODO
             return new Respuesta(true, "", "");
         } catch (Exception ex) {
             Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE, "Error eliminando el empleado.", ex);
