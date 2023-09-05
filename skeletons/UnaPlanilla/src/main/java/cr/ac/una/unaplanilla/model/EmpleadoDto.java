@@ -6,6 +6,7 @@
 package cr.ac.una.unaplanilla.model;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -34,6 +35,7 @@ public class EmpleadoDto {
     private Long version;
     // TODO
     private Boolean modificado;
+    private List<ExpenseDto> expenses;
 
     public EmpleadoDto() {
         this.id = new SimpleStringProperty();
@@ -41,13 +43,13 @@ public class EmpleadoDto {
         this.primerApellido = new SimpleStringProperty();
         this.segundoApellido = new SimpleStringProperty();
         this.cedula = new SimpleStringProperty();
-        this.genero = new SimpleObjectProperty("M");
+        this.genero = new SimpleObjectProperty<String>("M");
         this.correo = new SimpleStringProperty();
         this.administrador = new SimpleBooleanProperty(false);
         this.usuario = new SimpleStringProperty();
         this.clave = new SimpleStringProperty();
-        this.fechaIngreso = new SimpleObjectProperty(LocalDate.now());
-        this.fechaSalida = new SimpleObjectProperty();
+        this.fechaIngreso = new SimpleObjectProperty<LocalDate>(LocalDate.now());
+        this.fechaSalida = new SimpleObjectProperty<LocalDate>();
         this.estado = new SimpleBooleanProperty(true);
         this.modificado = false;
     }
@@ -196,6 +198,19 @@ public class EmpleadoDto {
         }
         final EmpleadoDto other = (EmpleadoDto) obj;
         return Objects.equals(this.id, other.id);
+    }
+
+
+    public Boolean isModificado() {
+        return this.modificado;
+    }
+
+    public List<ExpenseDto> getExpenses() {
+        return this.expenses;
+    }
+
+    public void setExpenses(List<ExpenseDto> expenses) {
+        this.expenses = expenses;
     }
 
     @Override
