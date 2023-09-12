@@ -1,18 +1,18 @@
-,ID,EMP_NOMBRE,EMP_APELLIDOS,EMP_FECHAING,EMP_ESTADO,EMP_VERSION
-,2,Carlos Manuel,Carranza Blanco,3/5/2017,A,4
-,4,karen,carranza,08/05/2017,A,1
-,6,Lucia,Cordero,4/5/2017,A,1
-,7,Johan,García,11/5/2017,A,1
-,8,Jorge,Jimenez,11/5/2017,A,1
-,9,Yedier,Solano,11/5/2017,A,1
-,10,Alcides,Arias,11/5/2017,A,1
-,11,Hilario,Gonzales,11/5/2017,A,1
-,12,Juan,Gamboa,11/5/2017,A,1
-,13,Saray,Arroyo,11/5/2017,A,1
-,14,Karla,Zuñiga,11/5/2017,I,1
-,15,Laura,Perez,11/5/2017,A,1
-,16,Sofia,Zeledon,11/5/2017,A,1
-,17,Argenis,Navarro,11/5/2017,A,1
-,18,Steven,Cordero,11/5/2017,I,1
-,19,Diego,Monge,11/5/2017,A,1
-,20,Pablo,Mata,11/5/2017,A,1
+ID,EMP_NOMBRE,EMP_APELLIDOS,EMP_FECHAING,EMP_ESTADO,EMP_VERSION
+2,Carlos Manuel,Carranza Blanco,3/5/2017,A,4
+4,karen,carranza,08/05/2017,A,1
+6,Lucia,Cordero,4/5/2017,A,1
+7,Johan,García,11/5/2017,A,1
+8,Jorge,Jimenez,11/5/2017,A,1
+9,Yedier,Solano,11/5/2017,A,1
+10,Alcides,Arias,11/5/2017,A,1
+11,Hilario,Gonzales,11/5/2017,A,1
+12,Juan,Gamboa,11/5/2017,A,1
+13,Saray,Arroyo,11/5/2017,A,1
+14,Karla,Zuñiga,11/5/2017,I,1
+15,Laura,Perez,11/5/2017,A,1
+16,Sofia,Zeledon,11/5/2017,A,1
+17,Argenis,Navarro,11/5/2017,A,1
+18,Steven,Cordero,11/5/2017,I,1
+19,Diego,Monge,11/5/2017,A,1
+20,Pablo,Mata,11/5/2017,A,1
