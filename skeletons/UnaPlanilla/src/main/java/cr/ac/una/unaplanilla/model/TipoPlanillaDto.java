@@ -126,9 +126,8 @@ public class TipoPlanillaDto {
         return empleados;
     }
 
-    // TODO
-    public void setEmpleados(ObservableList<EmpleadoDto> empleados) {
-        this.empleados = empleados;
+    public void setEmpleados(List<EmpleadoDto> empleados) {
+        this.empleados.addAll(empleados);
     }
 
     public List<EmpleadoDto> getEmpleadosEliminados() {
@@ -173,5 +172,5 @@ public class TipoPlanillaDto {
     public String toString() {
         return "TipoPlanillaDto{" + "codigo=" + codigo + ", descripcion=" + descripcion + '}';
     }
-    
+
 }

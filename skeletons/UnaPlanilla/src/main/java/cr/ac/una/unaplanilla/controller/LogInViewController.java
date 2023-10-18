@@ -8,6 +8,8 @@ package cr.ac.una.unaplanilla.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+
+import cr.ac.una.unaplanilla.model.EmpleadoDto;
 import cr.ac.una.unaplanilla.service.EmpleadoService;
 import cr.ac.una.unaplanilla.util.AppContext;
 import cr.ac.una.unaplanilla.util.FlowController;
@@ -65,19 +67,23 @@ public class LogInViewController extends Controller implements Initializable {
         try {
 
             if (txfUsuario.getText() == null || txfUsuario.getText().isBlank()) {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", getStage(), "Es necesario digitar un usuario para ingresar al sistema.");
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", getStage(),
+                        "Es necesario digitar un usuario para ingresar al sistema.");
             } else if (psfClave.getText() == null || psfClave.getText().isEmpty()) {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", getStage(), "Es necesario digitar la clave para ingresar al sistema.");
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", getStage(),
+                        "Es necesario digitar la clave para ingresar al sistema.");
             } else {
                 EmpleadoService empleadoService = new EmpleadoService();
-                Respuesta respuesta = empleadoService.getUsuario(txfUsuario.getText(), psfClave.getText());
+                Respuesta respuesta = empleadoService.getUser(txfUsuario.getText(), psfClave.getText());
                 if (respuesta.getEstado()) {
-                   // TODO
-                   AppContext.getInstance().set("Usuario", respuesta.getResultado("Empleado"));
-                   FlowController.getInstance().goMain();
-                   getStage().close();
+                    EmpleadoDto empleadoDto = (EmpleadoDto) respuesta.getResultado("Empleado");
+                    AppContext.getInstance().set("Token", empleadoDto.getToken());
+                    AppContext.getInstance().set("Usuario", empleadoDto);
+                    FlowController.getInstance().goMain();
+                    getStage().close();
                 } else {
-                    new Mensaje().showModal(Alert.AlertType.ERROR, "Validación Usuario", getStage(), respuesta.getMensaje());
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Validación Usuario", getStage(),
+                            respuesta.getMensaje());
                 }
             }
         } catch (Exception ex) {

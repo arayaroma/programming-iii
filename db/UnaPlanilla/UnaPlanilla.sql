@@ -125,14 +125,14 @@ BEGIN
     :NEW.EMP_ID := PLAM_EMPLEADOS_SEQ01.NEXTVAL;
   END IF;
 END;
-/
+
 
 CREATE OR REPLACE TRIGGER PLAM_EMPLEADOS_TGR02 AFTER
   UPDATE OF EMP_ID ON PLAM_EMPLEADOS FOR EACH ROW
 BEGIN
   RAISE_APPLICATION_ERROR(-20010, 'Cannot update column emp_id in table plam_empleados as it uses sequence.');
 END;
-/
+
 
 -- Trigger for sequence plam_tipoplanillas_sec01 for column tpla_id in table plam_tipoplanillas ---------
 CREATE OR REPLACE TRIGGER PLAM_TIPOPLANILLAS_TGR01 BEFORE
@@ -142,14 +142,14 @@ BEGIN
     :NEW.TPLA_ID := PLAM_TIPOPLANILLAS_SEQ01.NEXTVAL;
   END IF;
 END;
-/
+
 
 CREATE OR REPLACE TRIGGER PLAM_TIPOPLANILLAS_TGR02 AFTER
   UPDATE OF TPLA_ID ON PLAM_TIPOPLANILLAS FOR EACH ROW
 BEGIN
   RAISE_APPLICATION_ERROR(-20010, 'Cannot update column tpla_id in table plam_tipoplanillas as it uses sequence.');
 END;
-/
+
 
 -- Create foreign keys (relationships) section -------------------------------------------------
 

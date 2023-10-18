@@ -31,8 +31,8 @@ public class EmpleadoDto {
     private String estado;
     private Long version;
     private Boolean modificado;
-   // TODO
     private LocalDateTime fecha;
+    private String token;
 
     public EmpleadoDto() {
         this.modificado = false;
@@ -52,7 +52,7 @@ public class EmpleadoDto {
         this.usuario = empleado.getUsuario();
         this.clave = empleado.getClave();
         this.fechaIngreso = empleado.getFechaIngreso();
-        if (empleado.getFechaSalida()!= null) {
+        if (empleado.getFechaSalida() != null) {
             this.fechaSalida = empleado.getFechaSalida();
         } else {
             this.fechaSalida = null;
@@ -165,7 +165,7 @@ public class EmpleadoDto {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
     public Boolean getModificado() {
         return modificado;
     }
@@ -188,6 +188,14 @@ public class EmpleadoDto {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
     }
 
     @Override
@@ -214,7 +222,8 @@ public class EmpleadoDto {
 
     @Override
     public String toString() {
-        return "EmpleadoDto{" + "id=" + id + ", nombre=" + nombre + ", primerApellido=" + primerApellido + ", segundoApellido=" + segundoApellido + ", cedula=" + cedula + '}';
+        return "EmpleadoDto{" + "id=" + id + ", nombre=" + nombre + ", primerApellido=" + primerApellido
+                + ", segundoApellido=" + segundoApellido + ", cedula=" + cedula + '}';
     }
 
 }

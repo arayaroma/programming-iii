@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import cr.ac.una.unaplanilla.model.EmpleadoDto;
 import cr.ac.una.unaplanilla.util.Request;
 import cr.ac.una.unaplanilla.util.Respuesta;
+import jakarta.ws.rs.core.GenericType;
 
 /**
  *
@@ -23,20 +24,35 @@ public class EmpleadoService {
 
     EmpleadoDto empleado;
 
-    public Respuesta getUsuario(String usuario, String clave) {
+    public Respuesta getUser(String user, String password) {
         try {
-            // TODO
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("user", user);
+            parametros.put("password", password);
+            Request request = new Request("EmpleadoController/user", "/{user}/{password}", parametros);
+            request.get();
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }
+            empleado = (EmpleadoDto) request.readEntity(EmpleadoDto.class);
             return new Respuesta(true, "", "", "Empleado", empleado);
         } catch (Exception ex) {
             Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE,
-                    "Error obteniendo el usuario [" + usuario + "]", ex);
+                    "Error obteniendo el usuario [" + user + "]", ex);
             return new Respuesta(false, "Error obteniendo el usuario.", "getUsuario " + ex.getMessage());
         }
     }
 
     public Respuesta getEmpleado(Long id) {
         try {
-            // TODO
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("id", id);
+            Request request = new Request("EmpleadoController/empleado", "/{id}", parametros);
+            request.get();
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }
+            empleado = (EmpleadoDto) request.readEntity(EmpleadoDto.class);
             return new Respuesta(true, "", "", "Empleado", empleado);
         } catch (Exception ex) {
             Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE,
@@ -47,8 +63,18 @@ public class EmpleadoService {
 
     public Respuesta getEmpleados(String cedula, String nombre, String pApellido) {
         try {
-            // TODO
-            return new Respuesta(true, "", "", "Empleados", empleado);
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("cedula", cedula);
+            parametros.put("nombre", nombre);
+            parametros.put("pApellido", pApellido);
+            Request request = new Request("EmpleadoController/empleados", "/{cedula}/{nombre}/{pApellido}", parametros);
+            request.get();
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }
+            List<EmpleadoDto> empleados = (List<EmpleadoDto>) request.readEntity(new GenericType<List<EmpleadoDto>>() {
+            });
+            return new Respuesta(true, "", "", "Empleados", empleados);
         } catch (Exception ex) {
             Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE, "Error obteniendo empleados.", ex);
             return new Respuesta(false, "Error obteniendo empleados.", "getEmpleados " + ex.getMessage());
@@ -57,8 +83,14 @@ public class EmpleadoService {
 
     public Respuesta guardarEmpleado(EmpleadoDto empleado) {
         try {
-            // TODO
+            Request request = new Request("EmpleadoController/empleado");
+            request.post(empleado);
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }
+            empleado = (EmpleadoDto) request.readEntity(EmpleadoDto.class);
             return new Respuesta(true, "", "", "Empleado", empleado);
+
         } catch (Exception ex) {
             Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE, "Error guardando el empleado.", ex);
             return new Respuesta(false, "Error guardando el empleado.", "guardarEmpleado " + ex.getMessage());
@@ -67,7 +99,13 @@ public class EmpleadoService {
 
     public Respuesta eliminarEmpleado(Long id) {
         try {
-            // TODO
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("id", id);
+            Request request = new Request("EmpleadoController/empleado", "/{id}", parametros);
+            request.delete();
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }
             return new Respuesta(true, "", "");
         } catch (Exception ex) {
             Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE, "Error eliminando el empleado.", ex);

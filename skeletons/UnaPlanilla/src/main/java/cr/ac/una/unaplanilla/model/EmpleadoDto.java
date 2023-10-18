@@ -33,7 +33,7 @@ public class EmpleadoDto {
     public ObjectProperty<LocalDate> fechaSalida;
     public SimpleBooleanProperty estado;
     private Long version;
-    // TODO
+    private String token;
     private Boolean modificado;
     private List<ExpenseDto> expenses;
 
@@ -52,6 +52,7 @@ public class EmpleadoDto {
         this.fechaSalida = new SimpleObjectProperty<LocalDate>();
         this.estado = new SimpleBooleanProperty(true);
         this.modificado = false;
+        this.token = "";
     }
 
     public Long getId() {
@@ -115,7 +116,7 @@ public class EmpleadoDto {
     }
 
     public String getAdministrador() {
-        return administrador.get()? "S":"N";
+        return administrador.get() ? "S" : "N";
     }
 
     public void setAdministrador(String administrador) {
@@ -178,7 +179,7 @@ public class EmpleadoDto {
         this.modificado = modificado;
     }
 
-     @Override
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 61 * hash + Objects.hashCode(this.id);
@@ -200,7 +201,6 @@ public class EmpleadoDto {
         return Objects.equals(this.id, other.id);
     }
 
-
     public Boolean isModificado() {
         return this.modificado;
     }
@@ -213,9 +213,18 @@ public class EmpleadoDto {
         this.expenses = expenses;
     }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return this.token;
+    }
+
     @Override
     public String toString() {
-        return "EmpleadoDto{" + "id=" + id + ", nombre=" + nombre + ", primerApellido=" + primerApellido + ", segundoApellido=" + segundoApellido + ", cedula=" + cedula + '}';
+        return "EmpleadoDto{" + "id=" + id + ", nombre=" + nombre + ", primerApellido=" + primerApellido
+                + ", segundoApellido=" + segundoApellido + ", cedula=" + cedula + '}';
     }
 
 }

@@ -8,7 +8,6 @@ package cr.ac.una.unaplanillaws.model;
 import java.io.Serializable;
 import java.util.List;
 import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,6 +19,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.QueryHint;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
@@ -31,12 +31,14 @@ import jakarta.persistence.Version;
 @Entity
 @Table(name = "PLAM_TIPOPLANILLAS", schema = "UNA")
 @NamedQueries({
-    @NamedQuery(name = "TipoPlanilla.findAll", query = "SELECT t FROM TipoPlanilla t")
-    , @NamedQuery(name = "TipoPlanilla.findById", query = "SELECT t FROM TipoPlanilla t WHERE t.id = :id")})
+        @NamedQuery(name = "TipoPlanilla.findAll", query = "SELECT t FROM TipoPlanilla t"),
+        @NamedQuery(name = "TipoPlanilla.findById", query = "SELECT t FROM TipoPlanilla t WHERE t.id = :id"),
+        @NamedQuery(name = "TipoPlanilla.findByIdCodeAndDescription", query = "SELECT t FROM TipoPlanilla t WHERE t.id = :id or UPPER(t.codigo) like :codigo or UPPER(t.descripcion) like :descripcion", hints = @QueryHint(name = "eclipselink.refresh", value = "true")) })
 public class TipoPlanilla implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    // @Max(value=?) @Min(value=?)//if you know range of your decimal fields
+    // consider using these annotations to enforce field validation
     @Id
     @SequenceGenerator(name = "PLAM_TIPOPLANILLAS_TPLA_ID_GENERATOR", sequenceName = "una.PLAM_TIPOPLANILLAS_SEQ01", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PLAM_TIPOPLANILLAS_TPLA_ID_GENERATOR")
@@ -66,8 +68,8 @@ public class TipoPlanilla implements Serializable {
     @Column(name = "TPLA_VERSION")
     private Long version;
     @JoinTable(name = "PLAM_EMPLEADOSPLANILLA", joinColumns = {
-        @JoinColumn(name = "EXP_IDTPLA", referencedColumnName = "TPLA_ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "EXP_IDEMP", referencedColumnName = "EMP_ID")})
+            @JoinColumn(name = "EXP_IDTPLA", referencedColumnName = "TPLA_ID") }, inverseJoinColumns = {
+                    @JoinColumn(name = "EXP_IDEMP", referencedColumnName = "EMP_ID") })
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Empleado> empleados;
 
@@ -78,8 +80,8 @@ public class TipoPlanilla implements Serializable {
         this.id = tipoPlanillaDto.getId();
         actualizar(tipoPlanillaDto);
     }
-    
-    public void actualizar(TipoPlanillaDto tipoPlanillaDto){
+
+    public void actualizar(TipoPlanillaDto tipoPlanillaDto) {
         this.codigo = tipoPlanillaDto.getCodigo();
         this.descripcion = tipoPlanillaDto.getDescripcion();
         this.planillaPorMes = tipoPlanillaDto.getPlanillaPorMes();
@@ -194,5 +196,5 @@ public class TipoPlanilla implements Serializable {
     public String toString() {
         return "cr.ac.una.unaplanilla.model.TipoPlanilla[ Id=" + id + " ]";
     }
-    
+
 }

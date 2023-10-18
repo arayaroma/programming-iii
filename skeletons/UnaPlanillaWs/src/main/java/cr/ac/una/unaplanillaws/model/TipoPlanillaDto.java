@@ -116,7 +116,7 @@ public class TipoPlanillaDto {
     public void setVersion(Long version) {
         this.version = version;
     }
-    
+
     public Boolean getModificado() {
         return modificado;
     }

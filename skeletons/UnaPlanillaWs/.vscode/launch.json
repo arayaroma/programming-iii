@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Attach) - Remote Payara",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 9009,
+            "sourcePaths": [
+                "${workspaceFolder}/src"
+            ]
+        }
+    ]
+}

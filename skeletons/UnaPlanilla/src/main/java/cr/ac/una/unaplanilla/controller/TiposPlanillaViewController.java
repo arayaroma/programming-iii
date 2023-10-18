@@ -18,8 +18,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -42,6 +45,10 @@ import cr.ac.una.unaplanilla.service.TipoPlanillaService;
 import cr.ac.una.unaplanilla.util.Formato;
 import cr.ac.una.unaplanilla.util.Mensaje;
 import cr.ac.una.unaplanilla.util.Respuesta;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -92,8 +99,25 @@ public class TiposPlanillaViewController extends Controller implements Initializ
     private JFXButton btnGuardar;
 
     TipoPlanillaDto tipoPlanillaDto;
+    TipoPlanillaService tipoPlanillaService;
     EmpleadoDto empleadoDto;
     List<Node> requeridos = new ArrayList<>();
+    @FXML
+    private Pane pantallaBuscarPlanilla;
+    @FXML
+    private TableView<TipoPlanillaDto> tbPlanillasEncontradas;
+    @FXML
+    private TableColumn<String, TipoPlanillaDto> tbColumnCod;
+    @FXML
+    private TableColumn<String, TipoPlanillaDto> tbColumnpxmes;
+    @FXML
+    private TableColumn<String, TipoPlanillaDto> tbColumnDesc;
+    @FXML
+    private TextField txfParametroAbuscar;
+    @FXML
+    private ComboBox<String> CbParametroAbuscar;
+    @FXML
+    private AnchorPane control;
 
     /**
      * Initializes the controller class.
@@ -131,7 +155,7 @@ public class TiposPlanillaViewController extends Controller implements Initializ
 
     @Override
     public void initialize() {
-
+        control.toFront();
     }
 
     private void nuevoTipoPlanilla() {
@@ -339,6 +363,8 @@ public class TiposPlanillaViewController extends Controller implements Initializ
 
     @FXML
     private void onActionBtnBuscar(ActionEvent event) {
+        CbParametroAbuscar.getItems().addAll("Codigo", "Descripcion", "Planillas por mes");
+        pantallaBuscarPlanilla.toFront();
     }
 
     @FXML
@@ -393,6 +419,51 @@ public class TiposPlanillaViewController extends Controller implements Initializ
             new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Tipo Planilla", getStage(),
                     "Ocurrio un error guardando el tipo de planilla.");
         }
+    }
+
+    @FXML
+    private void buscarPlanilla(ActionEvent event) {
+        TipoPlanillaService service = new TipoPlanillaService();
+        Respuesta respuesta = service.getTiposPlanillas();
+        List<TipoPlanillaDto> listaResponse = (List<TipoPlanillaDto>) respuesta.getResultado("TiposPlanillas");
+
+        System.out.println(respuesta.getResultado("TiposPlanillas"));
+        if (CbParametroAbuscar.getSelectionModel().getSelectedItem().equals("Codigo")) {
+            String codigo = txfParametroAbuscar.getText();
+            List<TipoPlanillaDto> filtered = listaResponse.stream()
+                    .filter(tipoPlanilla -> tipoPlanilla.getCodigo().equals(codigo))
+                    .collect(Collectors.toList());
+
+            tbPlanillasEncontradas.getItems().addAll(filtered);
+            tbColumnCod.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+            tbColumnDesc.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            tbColumnpxmes
+                    .setCellValueFactory(new PropertyValueFactory<>("planillaPorMes"));
+
+        } else if (CbParametroAbuscar.getSelectionModel().getSelectedItem().equals("Descripcion")) {
+            String descripcion = txfParametroAbuscar.getText();
+            listaResponse.stream()
+                    .filter(tipoPlanilla -> tipoPlanilla.getDescripcion().equals(descripcion))
+                    .forEach(tipoPlanilla -> tbPlanillasEncontradas.getItems().add(tipoPlanilla));
+
+            tbColumnCod.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+            tbColumnDesc.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            tbColumnpxmes
+                    .setCellValueFactory(new PropertyValueFactory<>("planillaPorMes"));
+        } else if (CbParametroAbuscar.getSelectionModel().getSelectedItem().equals("Planillas por mes")) {
+            String planillasPorMes = txfParametroAbuscar.getText();
+            listaResponse.stream()
+                    .filter(tipoPlanilla -> tipoPlanilla.getPlanillaPorMes().equals(planillasPorMes))
+                    .forEach(tipoPlanilla -> tbPlanillasEncontradas.getItems().add(tipoPlanilla));
+            tbColumnCod.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+            tbColumnDesc.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            tbColumnpxmes
+                    .setCellValueFactory(new PropertyValueFactory<>("planillaPorMes"));
+        }
+    }
+
+    @FXML
+    private void CargarPlanillaFromBuscar(ActionEvent event) {
     }
 
     private class ButtonCell extends TableCell<EmpleadoDto, Boolean> {
